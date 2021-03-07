@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Usuario } from '../Modelos/usuario.model';
+import { UsuarioService } from '../servicios/usuario.service';
 
 @Component({
   selector: 'app-navebar',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavebarComponent implements OnInit {
 
-  constructor() { }
+  constructor( private router: Router, private usuarioServicio: UsuarioService) { }
 
   ngOnInit(): void {
   }
 
+  public logout()
+  {
+    this.usuarioServicio.usuarioActivo = {} as Usuario;
+    localStorage.setItem('user','');
+    this.router.navigateByUrl("/login")
+  }
 }
